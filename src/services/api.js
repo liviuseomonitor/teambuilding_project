@@ -124,7 +124,7 @@ export const getTrackedKeywords = async (campaignId, useDemo = false) => {
 
         const keywords = Array.isArray(keywordsData) ? keywordsData : (keywordsData.data || []);
 
-        return keywords.map(k => ({
+        const mappedKeywords = keywords.map(k => ({
             id: k.keyword_id,
             campaign_id: campaignId,
             keyword: k.keyword,
@@ -132,6 +132,9 @@ export const getTrackedKeywords = async (campaignId, useDemo = false) => {
             current_rank: k.ranking_data?.desktop?.rank || '-',
             serp_features: k.serp_data?.desktop?.map(f => f.feature) || []
         }));
+
+        // Sort by search volume (descending) client-side to ensure proper order
+        return mappedKeywords.sort((a, b) => b.search_volume - a.search_volume);
 
     } catch (error) {
         console.error("Error fetching keywords:", error);
