@@ -1,9 +1,9 @@
-const API_PROXY_URL = '/request_proxy';
+const API_BASE_URL = 'https://api.seomonitor.com';
+const API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY2NjA5MjcxOCwidXNlcl9pZCI6MTk1Mjd9.TS5njd0hrq1knLWXe9VMNhPo6j5CFHIrv7jlqSmpG5s';
 
-// API Token is correctly handled by the Proxy (Netlify Function or Vite Proxy)
-// Do not expose it here in the frontend bundle.
-
+// Testing direct API calls (bypassing proxy temporarily)
 const headers = {
+    'Authorization': `Bearer ${API_TOKEN}`,
     'Content-Type': 'application/json'
 };
 
@@ -43,7 +43,7 @@ export const getCampaigns = async (useDemo = false) => {
     }
 
     try {
-        const response = await fetch(`${API_PROXY_URL}/dashboard/v3.0/campaigns/tracked?limit=100`, { headers });
+        const response = await fetch(`${API_BASE_URL}/dashboard/v3.0/campaigns/tracked?limit=100`, { headers });
         if (!response.ok) throw new Error('Failed to fetch campaigns');
         const data = await response.json();
 
@@ -64,7 +64,7 @@ export const getDailySerpFeaturePresence = async (campaignId, keywordId, startDa
     if (useDemo) return getMockDailySerpFeaturePresence();
 
     try {
-        const url = `${API_PROXY_URL}/rank-tracker/v3.0/keywords/serp-feature-presence?campaign_id=${campaignId}&keyword_ids=${keywordId}&start_date=${startDate}&end_date=${endDate}`;
+        const url = `${API_BASE_URL}/rank-tracker/v3.0/keywords/serp-feature-presence?campaign_id=${campaignId}&keyword_ids=${keywordId}&start_date=${startDate}&end_date=${endDate}`;
         const response = await fetch(url, { headers });
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
@@ -110,7 +110,7 @@ export const getTrackedKeywords = async (campaignId, useDemo = false) => {
         const startStr = startDate.toISOString().split('T')[0];
         const endStr = endDate.toISOString().split('T')[0];
 
-        const keywordsResponse = await fetch(`${API_PROXY_URL}/rank-tracker/v3.0/keywords?campaign_id=${campaignId}&start_date=${startStr}&end_date=${endStr}&limit=5&order_by=search_volume&order_dir=desc`, { headers });
+        const keywordsResponse = await fetch(`${API_BASE_URL}/rank-tracker/v3.0/keywords?campaign_id=${campaignId}&start_date=${startStr}&end_date=${endStr}&limit=5&order_by=search_volume&order_dir=desc`, { headers });
         const keywordsData = await keywordsResponse.json();
 
         const keywords = Array.isArray(keywordsData) ? keywordsData : (keywordsData.data || []);
