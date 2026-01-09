@@ -119,7 +119,7 @@ export const getTrackedKeywords = async (campaignId, useDemo = false) => {
         const startStr = startDate.toISOString().split('T')[0];
         const endStr = endDate.toISOString().split('T')[0];
 
-        const keywordsResponse = await fetch(`${API_BASE_URL}/rank-tracker/v3.0/keywords?campaign_id=${campaignId}&start_date=${startStr}&end_date=${endStr}&limit=5&order_by=search_volume&order_dir=desc`, { headers });
+        const keywordsResponse = await fetch(`${API_BASE_URL}/rank-tracker/v3.0/keywords?campaign_id=${campaignId}&start_date=${startStr}&end_date=${endStr}&limit=5&order_by=search_volume&order_direction=desc`, { headers });
         const keywordsData = await keywordsResponse.json();
 
         const keywords = Array.isArray(keywordsData) ? keywordsData : (keywordsData.data || []);
