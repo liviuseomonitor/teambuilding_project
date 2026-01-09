@@ -1,7 +1,7 @@
 const API_BASE_URL = 'https://api.seomonitor.com';
-const API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY2NjA5MjcxOCwidXNlcl9pZCI6MTk1Mjd9.TS5njd0hrq1knLWXe9VMNhPo6j5CFHIrv7jlqSmpG5s';
+const API_TOKEN = ''; // Token removed for Netlify build
 
-// Testing direct API calls (bypassing proxy temporarily)
+// Using direct API calls
 const headers = {
     'Authorization': `Bearer ${API_TOKEN}`,
     'Content-Type': 'application/json'
