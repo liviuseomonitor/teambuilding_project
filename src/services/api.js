@@ -43,9 +43,18 @@ export const getCampaigns = async (useDemo = false) => {
     }
 
     try {
+        console.log('[API] Fetching campaigns from:', `${API_BASE_URL}/dashboard/v3.0/campaigns/tracked?limit=100`);
         const response = await fetch(`${API_BASE_URL}/dashboard/v3.0/campaigns/tracked?limit=100`, { headers });
-        if (!response.ok) throw new Error('Failed to fetch campaigns');
+        console.log('[API] Campaigns response status:', response.status);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('[API] Campaigns fetch failed:', response.status, errorText);
+            throw new Error(`Failed to fetch campaigns: ${response.status}`);
+        }
+
         const data = await response.json();
+        console.log('[API] Campaigns data:', data);
 
         const campaigns = Array.isArray(data) ? data : (data.data || []);
 
@@ -55,7 +64,7 @@ export const getCampaigns = async (useDemo = false) => {
             title: c.campaign_info.name || c.campaign_info.domain || 'Untitled Campaign'
         }));
     } catch (error) {
-        console.error("Error fetching campaigns:", error);
+        console.error("[API] Error fetching campaigns:", error);
         return [];
     }
 };
