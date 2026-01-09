@@ -55,6 +55,7 @@ const initialize = async () => {
     loading.value = true;
     await loadCampaigns();
     await loadKeywordData();
+    if (!selectedCampaignId.value) loading.value = false;
 };
 
 onMounted(() => {
