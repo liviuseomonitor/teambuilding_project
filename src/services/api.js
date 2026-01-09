@@ -1,5 +1,5 @@
 const API_BASE_URL = 'https://api.seomonitor.com';
-const API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY2NjA5MjcxOCwidXNlcl9pZCI6MTk1Mjd9.TS5njd0hrq1knLWXe9VMNhPo6j5CFHIrv7jlqSmpG5s';
+const API_TOKEN = import.meta.env.VITE_API_TOKEN_2 || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZW9tb25pdG9yLmNvbSIsImlhdCI6MTY2NjA5MjcxOCwidXNlcl9pZCI6MTk1Mjd9.TS5njd0hrq1knLWXe9VMNhPo6j5CFHIrv7jlqSmpG5s';
 
 // Using direct API calls
 const headers = {
