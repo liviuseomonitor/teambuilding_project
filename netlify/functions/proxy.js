@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+// Using native Node.js fetch (available in Node 18+)
+// const fetch = require('node-fetch'); // Removed to avoid ESM/CJS issues with v3
 
 exports.handler = async (event, context) => {
     // Extract the path from the request URL (remove /.netlify/functions/proxy prefix if present) or just use the splat
